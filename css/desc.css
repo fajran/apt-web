@@ -1,0 +1,25 @@
+
+body {
+	font-size: 12px;
+	font-family: sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td {
+	padding: 5px;
+	border: 1px solid #888;
+}
+
+#short {
+	color: red;
+}
+
+#long {
+	margin-bottom: 30px;
+}
+
+
+
