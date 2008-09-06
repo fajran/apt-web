@@ -53,7 +53,7 @@ Configuration
    configuration file config.php.
 
    $_mirror_list = array(
-     array('http://base.repository.url/ubuntu', 'Repository Name'),
+     array('http://mirror.url/ubuntu', 'Repository Name'),
      array('http://kambing.ui.edu/ubuntu', 'KAMBING.ui.edu')
    );
 

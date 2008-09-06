@@ -53,7 +53,7 @@ Konfigurasi
    berkas konfigurasi config.php
 
    $_mirror_list = array(
-     array('http://base.repository.url/ubuntu', 'Nama Repositori'),
+     array('http://url.mirror/ubuntu', 'Nama Repositori'),
      array('http://kambing.ui.edu/ubuntu', 'KAMBING.ui.edu')
    );
 
