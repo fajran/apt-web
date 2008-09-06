@@ -10,12 +10,14 @@ $valid = false;
 
 if (($package != '') && (isset($_repo_list[$dist]))) {
 
+	// Get package description
 	$data = apt_show($_repo_list[$dist][0], $package);
 
 	$line = true;
 	$info = array();
 	while ($line) {
 
+		// Long description
 		if (strpos($line, 'Description') === 0) {
 			$short_desc = substr($line, 13);
 			$long_desc = '<p>';
@@ -34,6 +36,7 @@ if (($package != '') && (isset($_repo_list[$dist]))) {
 			$long_desc .= '</p>';
 		}
 
+		// Other informations
 		else {
 			if ($line !== true) {
 				$info[] = explode(': ', $line);

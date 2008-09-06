@@ -1,11 +1,13 @@
 <?
 
+// Clean the package name
 function parse_clean($package) {
 	$pattern = '/[^a-z0-9.-]/';
 	$replacement = '';
 	return preg_replace($pattern, $replacement, $package);
 }
 
+// Parse given packages string
 function parse($packages) {
 	$p = explode(' ', $packages);
 	$list = array();
@@ -15,6 +17,7 @@ function parse($packages) {
 	return implode(' ', $list);
 }
 
+// Get repository's directory
 function get_dir($repo) {
 	global $_repo_dir;
 	
@@ -28,6 +31,7 @@ function get_dir($repo) {
 	}
 }
 
+// Run apt-get or apt-cache safely (cross your fingers :-)
 function run_apt($cmd, $repo) {	
 	$dir = get_dir($repo);
 	if ($dir !== false) {
@@ -40,6 +44,7 @@ function run_apt($cmd, $repo) {
 	}
 }
 
+// Search packages (not used yet!)
 function apt_search($repo, $packages) {
 	global $_file_apt_cache;
 
@@ -47,6 +52,7 @@ function apt_search($repo, $packages) {
 	return run_apt($cmd, $repo);
 }
 
+// Get package description
 function apt_show($repo, $packages) {
 	global $_file_apt_cache;
 
@@ -54,6 +60,7 @@ function apt_show($repo, $packages) {
 	return run_apt($cmd, $repo);
 }
 
+// Get URLs of ready to be installed packages
 function apt_install($repo, $packages) {
 	global $_file_apt_get;
 
@@ -61,6 +68,7 @@ function apt_install($repo, $packages) {
 	return run_apt($cmd, $repo);
 }
 
+// Retrieve extra, suggested, recommended, and to be installed packages
 function parse_install($data) {
 	$extra = array();
 	$suggested = array();
@@ -72,11 +80,13 @@ function parse_install($data) {
 	$line = true;
 	while ($line) {
 
+		// Already installed package, skip!
 		if (substr($line, -30) == 'is already the newest version.') {
 			$newest[] = substr($line, 0, -31);
 			$line = array_shift($data);
 		}
 
+		// Extra packages
 		else if (strpos($line, 'The following extra packages will be installed:') === 0) {
 			$line = array_shift($data);
 			while (strpos($line, ' ') === 0) {
@@ -85,6 +95,7 @@ function parse_install($data) {
 			}
 		}
 
+		// Suggested packages
 		else if (strpos($line, 'Suggested packages:') === 0) {
 			$line = array_shift($data);
 			while (strpos($line, ' ') === 0) {
@@ -93,6 +104,7 @@ function parse_install($data) {
 			}
 		}
 
+		// Recommended packages
 		else if (strpos($line, 'Recommended packages:') === 0) {
 			$line = array_shift($data);
 			while (strpos($line, ' ') === 0) {
@@ -101,6 +113,7 @@ function parse_install($data) {
 			}
 		}
 
+		// Ready to be installed (downloaded) packages
 		else if (strpos($line, 'The following NEW packages will be installed:') === 0) {
 			$line = array_shift($data);
 			while (strpos($line, ' ') === 0) {
@@ -135,6 +148,7 @@ function parse_install($data) {
 	);
 }
 
+// Get URL from a mirror
 function convert_url($url, $mirror_url) {
 	global $_repo_mirror_base;
 	return str_replace($_repo_mirror_base, $mirror_url, $url);

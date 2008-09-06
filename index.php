@@ -17,6 +17,8 @@ if (isset($_POST['submit'])) {
 	$mirror = isset($_POST['mirror']) ? intval(trim($_POST['mirror'])) : 0;
 
 	if (($packages != '') && (isset($_repo_list[$dist]))) {
+
+		// Get package dependencies and their URLs
 		$res = apt_install($_repo_list[$dist][0], $packages);
 		$res = parse_install($res);
 		$extra = &$res['extra'];
