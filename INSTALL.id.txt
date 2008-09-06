@@ -31,8 +31,8 @@ Konfigurasi
       deb http://archive.ubuntu.com/ubuntu hardy main restricted universe multiverse
 
       Pastikan menggunakan referensi URL repositori yang diatur dalam
-	  berkas konfigurasi. Jika Anda mengubah nilainya, pastikan Anda
-	  memperbaharui seluruh repositori yang ada.
+      berkas konfigurasi. Jika Anda mengubah nilainya, pastikan Anda
+      memperbaharui seluruh repositori yang ada.
 
    d. Letakkan berkas "status" (/var/lib/dpkg/status) dari sebuah sitem
       yang baru diinstal.
