@@ -1,0 +1,59 @@
+
+Requirements
+============
+
+1. System with apt-get installed. Apt-web needs apt-get and apt-web.
+2. Web server with php4 (or newer)
+
+
+Configuration
+=============
+
+1. You need to set the repository reference URL, i.e.
+   http://archive.ubuntu.com/ubuntu
+
+   Open config.php and set $_repo_mirror_base.
+
+2. If you want to add new repository, do the following.
+
+   a. Go to virtual/ directory
+
+      $ cd virtual
+
+   b. Copy the "base" directory to a new directory.
+
+      $ cp -a base ubuntu-8.04-i386
+
+   c. Edit sources.list file inside the new directory.
+
+      $ cd ubuntu-8.04-i386
+      $ cat sources.list
+      deb http://archive.ubuntu.com/ubuntu hardy main restricted universe multiverse
+
+      Make sure it uses the repository reference URL set in the
+      configuration file. If you change the value, make sure you update all
+      of your repositories.
+
+   d. Put the "status" file (/var/lib/dpkg/status) of a newly installed
+      system.
+
+   e. Update the index.
+
+      $ apt-get -c apt.conf update
+
+   f. Update the configuration file config.php. Add your new repository to
+      the $_repo_list variable.
+
+      $_repo_list = array(
+        array('repository-directory', 'Repository description'),
+        array('ubuntu-8.04-i386', 'Ubuntu 8.04 "Hardy Heron" i386')
+      );
+
+3. If you want to add a new mirror, edit $_mirror_list variable in the
+   configuration file config.php.
+
+   $_mirror_list = array(
+     array('http://base.repository.url/ubuntu', 'Repository Name'),
+     array('http://kambing.ui.edu/ubuntu', 'KAMBING.ui.edu')
+   );
+
