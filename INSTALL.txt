@@ -2,7 +2,7 @@
 Requirements
 ============
 
-1. System with apt-get installed. Apt-web needs apt-get and apt-web.
+1. System with apt-get installed. Apt-web needs apt-get and apt-cache.
 2. Web server with php4 (or newer)
 
 

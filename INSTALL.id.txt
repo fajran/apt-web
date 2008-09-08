@@ -2,7 +2,7 @@
 Kebutuhan
 =========
 
-1. Sistem yang terpasang apt-get. Apt-web membutuhkan apt-get dan apt-web.
+1. Sistem yang terpasang apt-get. Apt-web membutuhkan apt-get dan apt-cache.
 2. Web server dengan php4 (atau lebih baru)
 
 
