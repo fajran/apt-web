@@ -122,7 +122,9 @@ function parse_install($data) {
 			}
 		}
 
-		else if (strpos($line, 'After unpacking') === 0) {
+		else if ((strpos($line, 'After unpacking') === 0) ||
+			(strpos($line, 'After this operation') === 0)) {
+
 			$line = array_shift($data);
 			while (strpos($line, '\'') === 0) {
 				$info = explode(' ', $line);
