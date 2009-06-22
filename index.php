@@ -167,6 +167,6 @@ function cmirror(obj) {
 
 <? } ?>
 
-<div id="footer">apt-web(?) copyright &copy; 2007 - <a href="http://fajran.web.id">Fajran Iman Rusadi</a></div>
+<div id="footer"><a href="http://github.com/fajran/apt-web/">apt-web</a> - copyright &copy; 2007 &ndash; 2009 - <a href="http://fajran.web.id">Fajran Iman Rusadi</a></div>
 
 </body></html>
