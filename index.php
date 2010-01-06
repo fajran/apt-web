@@ -93,7 +93,7 @@ function cmirror(obj) {
 <h1>Which files should I download?</h1>
 
 <div id="form">
-<form method="post" action="index.php">
+<form method="post">
 
 <p><label>Base distribution</label>
 	<select name="dist" value="<?=$dist;?>">
