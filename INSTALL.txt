@@ -10,7 +10,7 @@ Configuration
 =============
 
 1. You need to set the repository reference URL, i.e.
-   http://archive.ubuntu.com/ubuntu
+   http://archive.ubuntu.com/ubuntu/
 
    Open config.php and set $_repo_mirror_base.
 
@@ -28,7 +28,7 @@ Configuration
 
       $ cd ubuntu-8.04-i386
       $ cat sources.list
-      deb http://archive.ubuntu.com/ubuntu hardy main restricted universe multiverse
+      deb http://archive.ubuntu.com/ubuntu/ hardy main restricted universe multiverse
 
       Make sure it uses the repository reference URL set in the
       configuration file. If you change the value, make sure you update all
@@ -53,7 +53,7 @@ Configuration
    configuration file config.php.
 
    $_mirror_list = array(
-     array('http://mirror.url/ubuntu', 'Repository Name'),
-     array('http://kambing.ui.edu/ubuntu', 'KAMBING.ui.edu')
+     array('http://mirror.url/ubuntu/', 'Repository Name'),
+     array('http://kambing.ui.ac.id/ubuntu/', 'KAMBING.ui.ac.id')
    );
 
