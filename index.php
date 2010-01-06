@@ -54,13 +54,13 @@ function description_link($pkg) {
 var disabled = true;
 <? if (isset($_POST['submit'])) { ?>
 disabled = false;
-var base_url = "<?=$_mirror_list[$mirror][0];?>";
+var base_url = "<?=rtrim($_mirror_list[$mirror][0], '/');?>";
 <? } ?>
 var mirrors = [];
 <?
 reset($_mirror_list);
 while (list($key, $val) = each($_mirror_list)) {
-	print('mirrors['.$key.'] = "'.$val[0].'";'."\n");
+	print('mirrors['.$key.'] = "'.rtrim($val[0], '/').'";'."\n");
 }
 ?>
 var urls = [];

@@ -153,7 +153,9 @@ function parse_install($data) {
 // Get URL from a mirror
 function convert_url($url, $mirror_url) {
 	global $_repo_mirror_base;
-	return str_replace($_repo_mirror_base, $mirror_url, $url);
+	$base = rtrim($_repo_mirror_base, '/');
+	$mirror_url = rtrim($mirror_url, '/');
+	return str_replace($base, $mirror_url, $url);
 }
 
 ?>
