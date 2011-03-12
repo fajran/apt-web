@@ -50,7 +50,9 @@ function description_link($pkg) {
 <style type="text/css">@import "css/style.css";</style>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
 <script type="text/javascript">
+ZeroClipboard.setMoviePath('js/ZeroClipboard.swf');
 var disabled = true;
 <? if (isset($_POST['submit'])) { ?>
 disabled = false;

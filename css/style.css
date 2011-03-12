@@ -57,6 +57,15 @@ label {
 	padding: 0px;
 	list-style: none;
 }
+#urls-head {
+    margin-bottom: 10px;
+}
+#urls-head span {
+    cursor: pointer;
+}
+#urls-head h2 {
+    display: inline;
+}
 
 #desc {
     padding: 15px;
