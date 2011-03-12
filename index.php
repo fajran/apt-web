@@ -39,17 +39,17 @@ if (isset($_POST['submit'])) {
 
 function description_link($pkg) {
 	global $dist;
-	return "<a href=\"desc.php?p=$pkg&d=$dist&width=650&height=550\" class=\"thickbox\" title=\"$pkg\">$pkg</a>";
+	return "<a href=\"desc.php?p=$pkg&d=$dist\" title=\"$pkg\">$pkg</a>";
 }
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html><head>
 <title>Which files should I download?</title>
-<style type="text/css">@import "css/thickbox.css";</style>
+<style type="text/css">@import "css/colorbox.css";</style>
 <style type="text/css">@import "css/style.css";</style>
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/thickbox.js"></script>
+<script type="text/javascript" src="js/jquery.colorbox-min.js"></script>
 <script type="text/javascript">
 var disabled = true;
 <? if (isset($_POST['submit'])) { ?>

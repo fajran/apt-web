@@ -22,3 +22,9 @@ function cmirror(obj) {
 	$('#urls ul').html(txt);
 }
 
+$(document).ready(function() {
+    $('#pkg-newest, #pkg-extra, #pkg-rec, #pkg-suggest, #pkg-inst')
+        .find('a')
+        .colorbox({'maxWidth': 800, 'maxHeight': '75%'})
+});
+
