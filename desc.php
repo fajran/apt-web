@@ -20,20 +20,20 @@ if (($package != '') && (isset($_repo_list[$dist]))) {
 		// Long description
 		if (strpos($line, 'Description') === 0) {
 			$short_desc = substr($line, 13);
-			$long_desc = '<p>';
+			$long_desc = array();
 
 			$line = array_shift($data);
 			while (strpos($line, ' ') === 0) {
 				if ($line == ' .') {
-					$long_desc .= '</p><p>';
+                    $long_desc[] = '';
 				}
 				else {
-					$long_desc .= $line;
+					$long_desc[] = trim($line);
 				}
 				$line = array_shift($data);
 			}
 
-			$long_desc .= '</p>';
+			$long_desc = implode("\n", $long_desc);
 		}
 
 		// Other informations
