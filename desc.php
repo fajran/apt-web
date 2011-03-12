@@ -63,9 +63,9 @@ if (($package != '') && (isset($_repo_list[$dist]))) {
 
 <p id="short"><?=$short_desc;?></p>
 
-<div id="long">
+<pre id="long">
 <?=$long_desc;?>
-</div>
+</pre>
 
 <div id="info">
 <table>

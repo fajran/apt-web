@@ -2,6 +2,11 @@
 body {
 	font-size: 12px;
 	font-family: sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    margin-top: 0px;
 }
 
 table {
@@ -15,6 +20,7 @@ td {
 
 #short {
 	color: red;
+    font-family: monospace;
 }
 
 #long {

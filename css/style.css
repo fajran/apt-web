@@ -16,6 +16,7 @@ h2 {
 label {
 	width: 200px;
 	float: left;
+    padding-top: 5px;
 }
 
 #form {
@@ -28,22 +29,24 @@ label {
 }
 #form select, #form input.txt {
 	width: 300px;
-	height: 26px;
-	padding: 2px;
 	font-size: 14px;
 }
 #form input.txt {
-	height: 20px;
 	width: 286px;
-	padding: 5px;
 }
-#form option {
-	padding: 5px;
+#form input[type="submit"] {
+    margin-left: 200px;
 }
 
 #left {
 	float: left;
 	width: 300px;
+}
+#left h2 {
+    margin: 0 0 5px 0;
+}
+#left p {
+    margin: 0 0 20px 0;
 }
 #right {
 	margin-left: 340px;
@@ -55,6 +58,9 @@ label {
 	list-style: none;
 }
 
+#desc {
+    padding: 15px;
+}
 #desc table {
 	border-collapse: collapse;
 	border: 1px solid #888;
@@ -62,12 +68,13 @@ label {
 
 #desc #short {
 	color: red;
+    font-family: monospace;
 }
 #desc #long {
 	margin-bottom: 20px;
 }
 #desc h1 {
-	margin-top: 20px;
+	margin-top: 0px;
 }
 
 
