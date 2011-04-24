@@ -2,7 +2,7 @@
 
 // Clean the package name
 function parse_clean($package) {
-	$pattern = '/[^a-z0-9.-]/';
+	$pattern = '/[^a-z0-9.+-]/';
 	$replacement = '';
 	return preg_replace($pattern, $replacement, $package);
 }
