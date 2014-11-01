@@ -68,7 +68,6 @@ func ParseInstall(inp io.Reader) InstallInfo {
 			continue
 		}
 
-		fmt.Printf(">%s<\n", line)
 		if strings.Contains(line, "The following extra packages will be installed:") {
 			group = GROUP_EXTRA
 
