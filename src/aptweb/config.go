@@ -1,4 +1,4 @@
-package main
+package aptweb
 
 type Config struct {
 	AptGetPath   string
