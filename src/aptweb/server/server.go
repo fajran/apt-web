@@ -104,10 +104,17 @@ func (h *Handler) ShowDescription(w http.ResponseWriter, r *http.Request, d int,
 		return
 	}
 
-	io.WriteString(w, fmt.Sprintf("Package: %s, Dist: %d\n", pkg, d))
-	for k, v := range di {
-		io.WriteString(w, fmt.Sprintf("%s: %s\n", k, v))
+	var desc struct {
+		Pkg         string            `json:"pkg"`
+		Description map[string]string `json:"description"`
 	}
+
+	desc.Pkg = pkg
+	desc.Description = di
+
+	w.Header()["Content-Type"] = []string{"application/json"}
+	e := json.NewEncoder(w)
+	e.Encode(desc)
 }
 
 func unique(list []string) []string {
