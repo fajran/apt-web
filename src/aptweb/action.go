@@ -30,6 +30,10 @@ func (a *Action) Install(packages []string) (*InstallInfo, error) {
 	args = append(args, names...)
 
 	out, err := a.Apt.Get(a.Dist, args)
+	if ret, _ := GetReturnCode(err); ret == 100 {
+		return nil, nil
+	}
+
 	if err != nil {
 		return nil, err
 	}

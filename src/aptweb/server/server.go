@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -69,7 +71,7 @@ func (h *Handler) HandleDescription(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pkg := qs["pkg"][0]
+	pkg := strings.TrimSpace(qs["pkg"][0])
 	d, err := strconv.ParseInt(qs["d"][0], 10, 32)
 	if err != nil || len(pkg) == 0 || d < 0 {
 		BadRequest(w, r)
@@ -105,7 +107,72 @@ func (h *Handler) ShowDescription(w http.ResponseWriter, r *http.Request, d int,
 	}
 }
 
+func unique(list []string) []string {
+	m := make(map[string]bool)
+	for _, s := range list {
+		m[s] = true
+	}
+
+	res := make([]string, 0)
+	for k, _ := range m {
+		res = append(res, k)
+	}
+	return res
+}
+
+func splitPackages(list string) []string {
+	re := regexp.MustCompile("\\s+")
+	s := re.Split(strings.TrimSpace(list), -1)
+	pkgs := unique(s)
+	sort.Strings(pkgs)
+	return pkgs
+}
+
 func (h *Handler) HandleDependencies(w http.ResponseWriter, r *http.Request) {
+	qs := r.URL.Query()
+	if len(qs["pkgs"]) == 0 || len(qs["d"]) == 0 {
+		BadRequest(w, r)
+		return
+	}
+
+	pkgs := splitPackages(qs["pkgs"][0])
+
+	d, err := strconv.ParseInt(qs["d"][0], 10, 32)
+	if err != nil || len(pkgs) == 0 || d < 0 {
+		BadRequest(w, r)
+		return
+	}
+
+	h.ShowDependencies(w, r, int(d), pkgs)
+}
+
+func (h *Handler) ShowDependencies(w http.ResponseWriter, r *http.Request, d int, pkgs []string) {
+	for _, pkg := range pkgs {
+		io.WriteString(w, fmt.Sprintf("pkg: [%s]\n", pkg))
+	}
+
+	if len(h.aptWebConfig.DistList) <= d {
+		http.NotFound(w, r)
+		return
+	}
+
+	dist := h.aptWebConfig.DistList[d]
+	a := aptweb.NewAction(dist, h.apt)
+	ii, err := a.Install(pkgs)
+	if err != nil {
+		log.Printf("Error showing dependencies: dist=%s dist=%s error: %v", dist.Path, pkgs, err)
+		InternalServerError(w, r)
+		return
+	}
+
+	if ii == nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	for _, u := range ii.Urls {
+		io.WriteString(w, fmt.Sprintf("%s\n", u.Url))
+	}
 }
 
 func NewServer(aptWebConfig *aptweb.Config, config *Config) *http.Server {
