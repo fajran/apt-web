@@ -2,7 +2,9 @@ package aptweb
 
 import (
 	"errors"
+	"os/exec"
 	"strings"
+	"syscall"
 )
 
 type Action struct {
@@ -38,6 +40,19 @@ func (a *Action) Install(packages []string) (*InstallInfo, error) {
 	return ii, nil
 }
 
+func GetReturnCode(err error) (int, error) {
+	if err == nil {
+		return 0, nil
+	}
+
+	if xerr, ok := err.(*exec.ExitError); ok {
+		s := xerr.Sys().(syscall.WaitStatus).ExitStatus()
+		return s, nil
+	} else {
+		return 0, err
+	}
+}
+
 func (a *Action) Show(pkg string) (DetailInfo, error) {
 	name := SanitizePackage(pkg)
 	if len(name) == 0 {
@@ -48,6 +63,10 @@ func (a *Action) Show(pkg string) (DetailInfo, error) {
 	args = append(args, "-c=apt.conf", "show", name)
 
 	out, err := a.Apt.Cache(a.Dist, args)
+	if ret, _ := GetReturnCode(err); ret == 100 {
+		return nil, nil
+	}
+
 	if err != nil {
 		return nil, err
 	}
