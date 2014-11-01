@@ -203,6 +203,7 @@ func (h *Handler) HandleInfo(w http.ResponseWriter, r *http.Request) {
 		info.Dists = append(info.Dists, di)
 	}
 
+	w.Header()["Content-Type"] = []string{"application/json"}
 	e := json.NewEncoder(w)
 	e.Encode(info)
 }
