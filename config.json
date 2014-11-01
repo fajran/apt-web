@@ -3,11 +3,16 @@
   "apt-cache": "/usr/bin/apt-cache",
 
   "dist-dir": "virtuals/",
-
   "dists": [
     {"name": "Ubuntu 14.04 Desktop amd64",
      "path": "ubuntu-14.04-desktop-amd64",
      "arch": "amd64"}
+  ],
+
+  "repo-base-url": "http://archive.ubuntu.com/ubuntu",
+  "repo-list": [
+    {"name": "Kambing UI",
+     "url": "http://kambing.ui.ac.id/ubuntu"}
   ]
 }
 
