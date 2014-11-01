@@ -6,11 +6,11 @@ import (
 )
 
 type Action struct {
-	Dist *Dist
+	Dist Dist
 	Apt  *Apt
 }
 
-func NewAction(dist *Dist, apt *Apt) *Action {
+func NewAction(dist Dist, apt *Apt) *Action {
 	return &Action{
 		Dist: dist,
 		Apt:  apt,

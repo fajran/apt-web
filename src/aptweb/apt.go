@@ -7,24 +7,24 @@ import (
 )
 
 type Apt struct {
-	Config Config
+	Config *Config
 }
 
-func NewApt(config Config) *Apt {
+func NewApt(config *Config) *Apt {
 	return &Apt{
 		Config: config,
 	}
 }
 
-func (apt *Apt) Get(dist *Dist, args []string) (string, error) {
+func (apt *Apt) Get(dist Dist, args []string) (string, error) {
 	return apt.run(apt.Config.AptGetPath, dist, args)
 }
 
-func (apt *Apt) Cache(dist *Dist, args []string) (string, error) {
+func (apt *Apt) Cache(dist Dist, args []string) (string, error) {
 	return apt.run(apt.Config.AptCachePath, dist, args)
 }
 
-func (apt *Apt) run(cmdPath string, dist *Dist, args []string) (string, error) {
+func (apt *Apt) run(cmdPath string, dist Dist, args []string) (string, error) {
 	cmd := exec.Command(cmdPath, args...)
 	cmd.Dir = apt.getDir(dist)
 
@@ -39,6 +39,6 @@ func (apt *Apt) run(cmdPath string, dist *Dist, args []string) (string, error) {
 	return out.String(), nil
 }
 
-func (apt *Apt) getDir(dist *Dist) string {
+func (apt *Apt) getDir(dist Dist) string {
 	return path.Join(apt.Config.DistDir, dist.Path)
 }
