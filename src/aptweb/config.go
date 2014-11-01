@@ -11,7 +11,7 @@ type Config struct {
 	AptCachePath string `json:"apt-cache"`
 
 	DistDir  string `json:"dist-dir"`
-	DistList []Dist `json:"dists"`
+	DistList []Dist `json:"dist-list"`
 
 	RepoBaseUrl string `json:"repo-base-url"`
 	RepoList    []Repo `json:"repo-list"`

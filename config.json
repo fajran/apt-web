@@ -3,7 +3,7 @@
   "apt-cache": "/usr/bin/apt-cache",
 
   "dist-dir": "virtuals/",
-  "dists": [
+  "dist-list": [
     {"name": "Ubuntu 14.04 Desktop amd64",
      "path": "ubuntu-14.04-desktop-amd64",
      "arch": "amd64"}
