@@ -7,10 +7,12 @@ import (
 	"strings"
 )
 
-func ParseDetail(inp io.Reader) map[string]string {
+type DetailInfo map[string]string
+
+func ParseDetail(inp io.Reader) DetailInfo {
 	var key string
 
-	data := make(map[string]string)
+	data := make(DetailInfo)
 
 	s := bufio.NewScanner(inp)
 	for s.Scan() {
@@ -53,10 +55,10 @@ const (
 	GROUP_UPGRADE     = 5
 )
 
-func ParseInstall(inp io.Reader) InstallInfo {
+func ParseInstall(inp io.Reader) *InstallInfo {
 	s := bufio.NewScanner(inp)
 
-	ii := InstallInfo{}
+	ii := &InstallInfo{}
 	ii.Packages = make(map[int][]string)
 	ii.Urls = make([]PackageUrl, 0)
 
