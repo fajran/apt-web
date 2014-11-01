@@ -197,20 +197,22 @@ func (h *Handler) ShowDependencies(w http.ResponseWriter, r *http.Request, d int
 
 func (h *Handler) HandleInfo(w http.ResponseWriter, r *http.Request) {
 	type RepoInfo struct {
-		Base string        `json:"base"`
-		List []aptweb.Repo `json:"list"`
+		Name string `json:"name"`
+		Url  string `json:"url"`
 	}
 	type DistInfo struct {
 		Id   int    `json:"id"`
 		Name string `json:"name"`
 	}
 	var info struct {
-		Repo  RepoInfo   `json:"repo"`
+		Repos []RepoInfo `json:"repos"`
 		Dists []DistInfo `json:"dists"`
 	}
 
-	info.Repo.Base = h.aptWebConfig.RepoBaseUrl
-	info.Repo.List = h.aptWebConfig.RepoList
+	for _, r := range h.aptWebConfig.RepoList {
+		repo := RepoInfo{r.Name, strings.TrimRight(r.Url, "/")}
+		info.Repos = append(info.Repos, repo)
+	}
 
 	for index, dist := range h.aptWebConfig.DistList {
 		di := DistInfo{
