@@ -5,12 +5,6 @@ import (
 	"strings"
 )
 
-type Dist struct {
-	Name string
-	Path string
-	Arch string
-}
-
 type Action struct {
 	Dist *Dist
 	Apt  *Apt

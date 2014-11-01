@@ -40,5 +40,5 @@ func (apt *Apt) run(cmdPath string, dist *Dist, args []string) (string, error) {
 }
 
 func (apt *Apt) getDir(dist *Dist) string {
-	return path.Join(apt.Config.DistPath, dist.Path)
+	return path.Join(apt.Config.DistDir, dist.Path)
 }

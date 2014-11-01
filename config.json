@@ -1,0 +1,13 @@
+{
+  "apt-get": "/usr/bin/apt-get",
+  "apt-cache": "/usr/bin/apt-cache",
+
+  "dist-dir": "virtuals/",
+
+  "dists": [
+    {"name": "Ubuntu 14.04 Desktop amd64",
+     "path": "ubuntu-14.04-desktop-amd64",
+     "arch": "amd64"}
+  ]
+}
+
