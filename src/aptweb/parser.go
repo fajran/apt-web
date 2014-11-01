@@ -61,6 +61,9 @@ func ParseInstall(inp io.Reader) *InstallInfo {
 	ii := &InstallInfo{}
 	ii.Packages = make(map[int][]string)
 	ii.Urls = make([]PackageUrl, 0)
+	for i := 0; i <= 6; i++ {
+		ii.Packages[i] = make([]string, 0)
+	}
 
 	group := GROUP_NONE
 	more := s.Scan()

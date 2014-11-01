@@ -3,8 +3,6 @@ package server
 import (
 	"aptweb"
 	"encoding/json"
-	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"regexp"
@@ -157,10 +155,6 @@ func (h *Handler) HandleDependencies(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) ShowDependencies(w http.ResponseWriter, r *http.Request, d int, pkgs []string) {
-	for _, pkg := range pkgs {
-		io.WriteString(w, fmt.Sprintf("pkg: [%s]\n", pkg))
-	}
-
 	if len(h.aptWebConfig.DistList) <= d {
 		http.NotFound(w, r)
 		return
@@ -180,9 +174,25 @@ func (h *Handler) ShowDependencies(w http.ResponseWriter, r *http.Request, d int
 		return
 	}
 
-	for _, u := range ii.Urls {
-		io.WriteString(w, fmt.Sprintf("%s\n", u.Url))
+	var data struct {
+		Packages    []string `json:"pkgs"`
+		Deps        []string `json:"deps"`
+		Suggested   []string `json:"suggested"`
+		Recommended []string `json:"recommended"`
 	}
+
+	data.Packages = pkgs
+	data.Suggested = ii.Packages[aptweb.GROUP_SUGGESTED]
+	data.Recommended = ii.Packages[aptweb.GROUP_RECOMMENDED]
+
+	baseUrl := strings.TrimRight(h.aptWebConfig.RepoBaseUrl, "/")
+	for _, u := range ii.Urls {
+		data.Deps = append(data.Deps, strings.TrimPrefix(u.Url, baseUrl))
+	}
+
+	w.Header()["Content-Type"] = []string{"application/json"}
+	e := json.NewEncoder(w)
+	e.Encode(data)
 }
 
 func (h *Handler) HandleInfo(w http.ResponseWriter, r *http.Request) {
