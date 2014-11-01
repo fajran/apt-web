@@ -2,6 +2,7 @@ package server
 
 import (
 	"aptweb"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -51,6 +52,8 @@ func (h *Handler) HandleAPI(w http.ResponseWriter, r *http.Request) {
 		h.HandleDescription(w, r)
 	} else if p == "dependencies" && r.Method == "GET" {
 		h.HandleDependencies(w, r)
+	} else if p == "info" && r.Method == "GET" {
+		h.HandleInfo(w, r)
 	} else {
 		http.NotFound(w, r)
 	}
@@ -173,6 +176,35 @@ func (h *Handler) ShowDependencies(w http.ResponseWriter, r *http.Request, d int
 	for _, u := range ii.Urls {
 		io.WriteString(w, fmt.Sprintf("%s\n", u.Url))
 	}
+}
+
+func (h *Handler) HandleInfo(w http.ResponseWriter, r *http.Request) {
+	type RepoInfo struct {
+		Base string        `json:"base"`
+		List []aptweb.Repo `json:"list"`
+	}
+	type DistInfo struct {
+		Id   int    `json:"id"`
+		Name string `json:"name"`
+	}
+	var info struct {
+		Repo  RepoInfo   `json:"repo"`
+		Dists []DistInfo `json:"dists"`
+	}
+
+	info.Repo.Base = h.aptWebConfig.RepoBaseUrl
+	info.Repo.List = h.aptWebConfig.RepoList
+
+	for index, dist := range h.aptWebConfig.DistList {
+		di := DistInfo{
+			Id:   index,
+			Name: dist.Name,
+		}
+		info.Dists = append(info.Dists, di)
+	}
+
+	e := json.NewEncoder(w)
+	e.Encode(info)
 }
 
 func NewServer(aptWebConfig *aptweb.Config, config *Config) *http.Server {
