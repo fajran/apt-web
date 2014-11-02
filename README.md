@@ -1,6 +1,8 @@
 Apt-Web
 =======
 
+[![Build Status](https://travis-ci.org/fajran/apt-web.svg?branch=master)](https://travis-ci.org/fajran/apt-web)
+
 A web based tool to show package dependencies in Debian based Linux distribution.
 
 Looking for the earlier version of this tool? Check the 
