@@ -18,14 +18,19 @@ func TestNewConfigFromJson(t *testing.T) {
   "apt-cache": "/usr/bin/apt-cache",
 
   "dist-dir": "virtuals/",
-
-  "dists": [
+  "dist-list": [
     {"name": "Ubuntu 14.04 \"Trusty Tahr\" Desktop amd64",
      "path": "ubuntu-14.04-desktop-amd64",
      "arch": "amd64"},
     {"name": "Ubuntu 14.10 \"Utopic Unicorn\" Desktop i386",
      "path": "ubuntu-14.10-desktop-i386",
      "arch": "i386"}
+  ],
+
+  "repo-base-url": "http://archive.ubuntu.com/ubuntu",
+  "repo-list": [
+    {"name": "Kambing UI",
+     "url": "http://kambing.ui.ac.id/ubuntu"}
   ]
 }
 `
@@ -40,6 +45,7 @@ func TestNewConfigFromJson(t *testing.T) {
 
 	assert(t, "/usr/bin/apt-get", config.AptGetPath)
 	assert(t, "/usr/bin/apt-cache", config.AptCachePath)
+
 	assert(t, "virtuals/", config.DistDir)
 	assert(t, 2, len(config.DistList))
 
@@ -61,7 +67,7 @@ func TestNewConfigFromJson_Incomplete(t *testing.T) {
 
   "dist-dir": "virtuals/",
 
-  "dists": [
+  "dist-list": [
     {"name": "Ubuntu 14.04 \"Trusty Tahr\" Desktop amd64",
      "path": "ubuntu-14.04-desktop-amd64",
      "arch": "amd64"},
