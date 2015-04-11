@@ -43,18 +43,20 @@ func (h *Handler) handleDependencies(w http.ResponseWriter, r *http.Request) {
 
 	var data struct {
 		Packages    []string `json:"pkgs"`
-		Deps        []string `json:"deps"`
+		Urls        []string `json:"urls"`
 		Suggested   []string `json:"suggested"`
 		Recommended []string `json:"recommended"`
+		Install     []string `json:"install"`
 	}
 
 	data.Packages = pkgs
 	data.Suggested = ii.Packages[aptweb.GROUP_SUGGESTED]
 	data.Recommended = ii.Packages[aptweb.GROUP_RECOMMENDED]
+	data.Install = ii.Packages[aptweb.GROUP_INSTALL]
 
 	baseUrl := strings.TrimRight(h.aptWebConfig.RepoBaseUrl, "/")
 	for _, u := range ii.Urls {
-		data.Deps = append(data.Deps, strings.TrimPrefix(u.Url, baseUrl))
+		data.Urls = append(data.Urls, strings.TrimPrefix(u.Url, baseUrl))
 	}
 
 	w.Header()["Content-Type"] = []string{"application/json"}
