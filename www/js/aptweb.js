@@ -19,17 +19,17 @@ app.controller('SearchCtrl', function($scope, $http) {
   $scope.search = function() {
     var params = {
       d: $scope.dist.id,
+      dn: $scope.dist.name,
       pkgs: $scope.pkgs,
     };
     $http.get('/api/v1/deps', {params: params})
       .success(function(data) {
         $scope.result = data;
-        console.log(data);
       });
-  }
 
+    _ga('send', 'pageview', '/search?' + jQuery.param(params));
+  }
 });
 
 
 })(angular.module('aptweb', []));
-

@@ -124,4 +124,21 @@ footer.copyright {
 <script src="/js/angular.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/aptweb.js"></script>
+<script>
+  var GOOGLE_ANALYTICS_ID = ''; //'UA-11936279-2';
+  if (GOOGLE_ANALYTICS_ID) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','_ga');
+  }
+  else {
+    window._ga = function() {
+      console.log('ga', arguments);
+    }
+  }
+  _ga('create', GOOGLE_ANALYTICS_ID, 'auto');
+  _ga('send', 'pageview');
+</script>
 </body>
+
