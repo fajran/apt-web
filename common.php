@@ -1,4 +1,4 @@
-<?
+<?php
 
 // Clean the package name
 function parse_clean($package) {

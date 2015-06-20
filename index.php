@@ -1,4 +1,4 @@
-<?
+<?php
 
 include('config.php');
 include('common.php');
@@ -54,10 +54,10 @@ function description_link($pkg) {
 <script type="text/javascript">
 ZeroClipboard.setMoviePath('js/ZeroClipboard.swf');
 var disabled = true;
-<? if (isset($_POST['submit'])) { ?>
+<?php if (isset($_POST['submit'])) { ?>
 disabled = false;
 var base_url = "<?=rtrim($_mirror_list[$mirror][0], '/');?>";
-<? } ?>
+<?php } ?>
 var mirrors = [];
 <?
 reset($_mirror_list);
@@ -76,17 +76,17 @@ while (list($key, $val) = each($_mirror_list)) {
 
 <p><label>Base distribution</label>
 	<select name="dist" value="<?=$dist;?>">
-<? while (list($key, $val) = each($dists)) { ?>
+<?php while (list($key, $val) = each($dists)) { ?>
 		<option <?=($dist==$key?'selected="selected" ':' ');?>value="<?=$key;?>"><?=$val[1];?></option>
-<? } ?>
+<?php } ?>
 	</select>
 </p>
 
 <p><label>Mirror</label>
 	<select name="mirror" onchange="cmirror(this)">
-<? while (list($key, $val) = each($mirrors)) { ?>
+<?php while (list($key, $val) = each($mirrors)) { ?>
 		<option <?=($mirror==$key?'selected="selected" ':' ');?>value="<?=$key;?>"><?=$val[1];?></option>
-<? } ?>
+<?php } ?>
 	</select>
 </p>
 
@@ -99,31 +99,31 @@ while (list($key, $val) = each($_mirror_list)) {
 </form>
 </div>
 
-<? if (isset($_POST['submit'])) { ?>
+<?php if (isset($_POST['submit'])) { ?>
 
 <div id="left">
 
-<? if (!empty($newest)) { ?>
+<?php if (!empty($newest)) { ?>
 <h2>Already Installed</h2>
 <p id="pkg-newest"><?=implode(', ', array_map('description_link', $newest));?></p>
-<? } ?>
+<?php } ?>
 
-<? if (!empty($extra)) { ?>
+<?php if (!empty($extra)) { ?>
 <h2>Extra</h2>
 <p id="pkg-extra"><?=implode(', ', array_map('description_link', $extra));?></p>
-<? } ?>
+<?php } ?>
 
-<? if (!empty($recommended)) { ?>
+<?php if (!empty($recommended)) { ?>
 <h2>Recommended</h2>
 <p id="pkg-rec"><?=implode(', ', array_map('description_link', $recommended));?></p>
-<? } ?>
+<?php } ?>
 
-<? if (!empty($suggested)) { ?>
+<?php if (!empty($suggested)) { ?>
 <h2>Suggested</h2>
 <p id="pkg-suggest"><?=implode(', ', array_map('description_link', $suggested));?></p>
-<? } ?>
+<?php } ?>
 
-<? if (!empty($install)) { ?>
+<?php if (!empty($install)) { ?>
 <h2>To Be Installed</h2>
 <p id="pkg-inst"><?=implode(', ', array_map('description_link', $install));?></p>
 
@@ -133,18 +133,18 @@ while (list($key, $val) = each($_mirror_list)) {
 <div id="urls">
 <h2>URLs</h2>
 <ul>
-<? foreach ($tbInstalled as $package) { ?>
+<?php foreach ($tbInstalled as $package) { ?>
 <li><a href="<?=$package[0];?>"><?=$package[0];?></a></li>
-<? } ?>
+<?php } ?>
 </ul>
 </div>
 
 </div>
-<? } ?>
+<?php } ?>
 
 </div>
 
-<? } ?>
+<?php } ?>
 
 <div id="footer"><a href="http://github.com/fajran/apt-web/">apt-web</a> - copyright &copy; 2007 &ndash; 2011 - <a href="http://fajran.web.id">Fajran Iman Rusadi</a></div>
 

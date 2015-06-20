@@ -1,4 +1,4 @@
-<?
+<?php
 
 include('config.php');
 include('common.php');
@@ -56,7 +56,7 @@ if (($package != '') && (isset($_repo_list[$dist]))) {
 <title><?=$package;?></title>
 <style type="text/css">@import "css/desc.css";</style>
 </head><body>
-<? if ($valid) { ?>
+<?php if ($valid) { ?>
 
 <div id="desc">
 <h1><?=$package;?></h1>
@@ -69,16 +69,16 @@ if (($package != '') && (isset($_repo_list[$dist]))) {
 
 <div id="info">
 <table>
-<? foreach ($info as $d) { ?>
+<?php foreach ($info as $d) { ?>
 <tr><td><?=$d[0];?></td><td><?=htmlentities($d[1]);?></td></tr>
-<? } ?>
+<?php } ?>
 </table>
 </div>
 </div>
 
-<? } else { ?>
+<?php } else { ?>
 
 <h1>Invalid input</h1>
 
-<? } ?>
+<?php } ?>
 </body></html>
